@@ -208,7 +208,7 @@ export default function AdminDashboard() {
       const role = collectionName === "institutions" ? "institution" : "company";
 
       const res = await fetch(
-        "http://localhost:5000/api/admin/approve-registration",
+        "https://landing-x99b.onrender.com/api/admin/approve-registration",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

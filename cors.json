@@ -1,7 +1,0 @@
-[
-  {
-    "origin": ["http://localhost:5173", "https://career-b680d.web.app"],
-    "method": ["GET", "POST", "PUT", "DELETE"],
-    "maxAgeSeconds": 3600
-  }
-]

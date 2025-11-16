@@ -59,6 +59,8 @@ const SectionPanel = memo(({ section, onBack, user, profile, setProfile }) => {
   const [editingProfile, setEditingProfile] = useState(false);
   const [tempProfile, setTempProfile] = useState({});
   const [enteredGrades, setEnteredGrades] = useState(null); // { marks: number, skills: array }
+  const [tempMarks, setTempMarks] = useState('');
+  const [tempSkills, setTempSkills] = useState('');
   const [gradesSubmitted, setGradesSubmitted] = useState(false);
 
   // Sync enteredGrades and gradesSubmitted with profile
@@ -368,25 +370,31 @@ const SectionPanel = memo(({ section, onBack, user, profile, setProfile }) => {
                   <input
                     type="number"
                     placeholder="Marks"
-                    onChange={(e) => setEnteredGrades(prev => ({ ...prev, marks: parseFloat(e.target.value) || 0 }))}
+                    value={tempMarks}
+                    onChange={(e) => setTempMarks(e.target.value)}
                     className="p-2 rounded bg-[rgba(255,255,255,0.01)] border text-white mb-2 w-full"
                   />
                   <input
                     type="text"
                     placeholder="Skills (comma separated)"
-                    onChange={(e) => setEnteredGrades(prev => ({ ...prev, skills: e.target.value.split(',').map(s => s.trim()).filter(s => s) }))}
+                    value={tempSkills}
+                    onChange={(e) => setTempSkills(e.target.value)}
                     className="p-2 rounded bg-[rgba(255,255,255,0.01)] border text-white mb-4 w-full"
                   />
                   <Button
                     onClick={async () => {
-                      if (!enteredGrades || !enteredGrades.marks || !enteredGrades.skills.length) {
+                      const marks = parseFloat(tempMarks) || 0;
+                      const skills = tempSkills.split(',').map(s => s.trim()).filter(s => s);
+                      if (!marks || !skills.length) {
                         alert("Please enter marks and skills.");
                       } else {
+                        const newEnteredGrades = { marks, skills };
                         try {
                           await updateDoc(doc(db, "students", user.uid), {
-                            enteredGrades,
+                            enteredGrades: newEnteredGrades,
                             gradesSubmitted: true,
                           });
+                          setEnteredGrades(newEnteredGrades);
                           setGradesSubmitted(true);
                           alert("Grades submitted successfully!");
                         } catch (err) {

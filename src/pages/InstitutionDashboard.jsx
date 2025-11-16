@@ -11,7 +11,7 @@ import { Button } from "../components/ui/button";
 
 const ELECTRIC = "#3ee0ff";
 const PURPLE = "#8b5cf6";
-const BG = "#0b0f1a";
+const BG = "#0b0f1a";o
 
 // Small Stats Card
 const StatTile = ({ label, value }) => (
