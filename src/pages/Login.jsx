@@ -56,7 +56,12 @@ function Login() {
           navigate("/company-dashboard");
           break;
         case "admin":
-          navigate("/admin-dashboard");
+          // Check for hardcoded admin password
+          if (password === "admin123") {
+            navigate("/admin-dashboard");
+          } else {
+            setError("Invalid admin credentials.");
+          }
           break;
         default:
           setError("Invalid role assigned.");

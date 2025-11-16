@@ -683,7 +683,7 @@ export default function StudentDashboard() {
         </nav>
       </aside>
 
-      <main className="ml-0 md:ml-72 p-6 pb-24 relative z-10">
+      <main className="ml-0 md:ml-72 p-4 md:p-6 pb-24 relative z-10">
         <AnimatePresence mode="wait">
           <SectionPanel
             key={activeSection}

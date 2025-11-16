@@ -498,7 +498,7 @@ export default function AdminDashboard() {
       <GlobeBG />
       <Sidebar active={active} setActive={setActive} logout={logout} />
 
-      <main className="ml-72 p-6 pt-10">
+      <main className="ml-0 md:ml-72 p-4 md:p-6 pt-10 pb-24 relative z-10">
         <AnimatePresence>
           <motion.div
             key={active}
