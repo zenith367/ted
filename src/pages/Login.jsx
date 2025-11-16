@@ -16,6 +16,13 @@ function Login() {
     setError("");
     setLoading(true);
 
+    // Hardcoded admin login
+    if (email === "admin@admin.com" && password === "admin123") {
+      navigate("/admin-dashboard");
+      setLoading(false);
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
