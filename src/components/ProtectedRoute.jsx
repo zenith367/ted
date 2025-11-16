@@ -11,6 +11,13 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    // Check for admin login first
+    if (localStorage.getItem("adminLoggedIn") === "true" && allowedRoles.includes("admin")) {
+      setUserData({ role: "admin" });
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
@@ -24,9 +31,14 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [allowedRoles]);
 
   if (loading) return <div className="text-center mt-20">Loading...</div>;
+
+  // Allow admin if logged in via localStorage
+  if (localStorage.getItem("adminLoggedIn") === "true" && allowedRoles.includes("admin")) {
+    return children;
+  }
 
   if (!user) return <Navigate to="/login" />;
   if (!user.emailVerified) return <Navigate to="/verify-email" />;

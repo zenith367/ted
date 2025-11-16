@@ -18,6 +18,7 @@ function Login() {
 
     // Hardcoded admin login
     if (email === "admin@admin.com" && password === "admin123") {
+      localStorage.setItem("adminLoggedIn", "true");
       navigate("/admin-dashboard");
       setLoading(false);
       return;
