@@ -160,6 +160,7 @@ export default function AdminDashboard() {
   const [chartData, setChartData] = useState([]);
 
   const logout = async () => {
+    localStorage.removeItem("adminLoggedIn");
     await signOut(auth);
     window.location.href = "/login";
   };
