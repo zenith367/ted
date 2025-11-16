@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../services/firebase";
 import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, query, where, onSnapshot, serverTimestamp } from "firebase/firestore";
@@ -143,6 +144,7 @@ const Sidebar = ({ active, setActive, logout }) => {
 };
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [active, setActive] = useState("Overview");
   const [institutions, setInstitutions] = useState([]);
   const [faculties, setFaculties] = useState([]);
@@ -162,7 +164,7 @@ export default function AdminDashboard() {
   const logout = async () => {
     localStorage.removeItem("adminLoggedIn");
     await signOut(auth);
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   useEffect(() => {
