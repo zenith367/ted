@@ -222,7 +222,7 @@ export default function AdminDashboard() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              id: item.id,
+              registrationId: item.id,
               email: item.email,
               name: item.name,
               role
